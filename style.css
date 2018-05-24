@@ -3,19 +3,69 @@
     margin: 0px auto;*/
 }
 
+.header {
+    font-size: 20px;
+}
+
 .header,.footer{
-    background-color: orange;
+    background-color: #3D9FFF;
+    text-align: center;
+    padding: 10px;
+}
+
+.footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
 }
 
 .content{
-    background-color: red;
+    background-color: #cfd8dc;
 }
+
 .row{
     margin: 0px;
 }
-.form{
-    background-color: green;
+
+#instructions {
+    padding: 10px;
 }
+
+.form{
+    background-color: #FFFFDF;
+}
+
+/* label color */
+.input-field label {
+    color: #333333;
+  }
+  /* label focus color */
+  .input-field input[type=text]:focus + label {
+    color: #333333;
+  }
+  /* label underline focus color */
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid #333333;
+    box-shadow: 0 1px 0 0 #333333;
+  }
+  /* valid color */
+  .input-field input[type=text].valid {
+    border-bottom: 1px solid #333333;
+    box-shadow: 0 1px 0 0 #333333;
+  }
+  /* invalid color */
+  .input-field input[type=text].invalid {
+    border-bottom: 1px solid #333333;
+    box-shadow: 0 1px 0 0 #333333;
+  }.input-field {
+    color:#333333;
+  }  
+
 .info{
     background-color: blueviolet;
+}
+
+#submitBtn {
+    background-color: green;
+    margin: 0 0 15px 10px;
 }

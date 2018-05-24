@@ -20,7 +20,7 @@
 <body>
     <!-- code goes here -->
     <div class="row header">
-        <div class="col s12">header</div>
+        <div class="col s12">Local Leaders</div>
     </div>
     <div class="row content">
         <div class="container">
@@ -28,6 +28,7 @@
                 <div class="row">
                     <form class="col s12">
                         <div class="row">
+                            <p id="instructions"><strong>Insert your current residence to search for your local politicians.</strong></p>
                             <div class="input-field col s12">
                                 <input id="stateId" type="text" class="validate">
                                 <label for="stateId">State</label>
@@ -44,7 +45,7 @@
                                 <input id="streetId" type="text" class="validate">
                                 <label for="streetId">Street</label>
                             </div>
-                            <a class="waves-effect waves-light btn-small">Submit</a>
+                            <a class="waves-effect waves-light btn-small" id="submitBtn">Submit</a>
                         </div>
                     </form>
                 </div>
