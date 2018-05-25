@@ -8,12 +8,9 @@ $("#submitBtn").on("click",function(){
     var zip = $("#zipId").val().trim();
     var street = $("#streetId").val().trim();
 
-    console.log(state);
-    console.log(city);
-    console.log(zip);
-    console.log(street);
     var address = street + "%20" + state + "%20" + city + "%20" + zip;
     address = address.replace(/ /g,"%20");
+
     $("#stateId").val("");
     $("#cityId").val("");
     $("#zipId").val("");
@@ -25,8 +22,16 @@ $("#submitBtn").on("click",function(){
         url: Url,
         method: 'GET',
     }).done(function (response) {
-        console.log(response);
-        //do stuff
+        console.log("SbmitBtn::onClick::ajax::done:: Valid Address")
+        var candidateList = response.contests[0].candidates;
+        var office = response.contests[0].office;
+        for(var candidateIndex=0; candidateIndex<candidateList.length; candidateIndex++){
+            var candidate = $("<a class='collection-item candidate'></a>");
+            $(candidate).text(candidateList[candidateIndex].name);
+            $("#candidateListId").append(candidate);
+        }        
+    }).fail(function(response){
+        console.log("SbmitBtn::onClick::ajax::fail:: Invalid address");
     })
 });
 
