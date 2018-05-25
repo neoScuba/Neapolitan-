@@ -4,7 +4,6 @@
 }
 
 .header {
-<<<<<<< HEAD
     font-size: 20px;
 }
 
@@ -24,7 +23,6 @@
     background-color: #cfd8dc;
 }
 
-=======
     font-size: 30px;
 }
 
@@ -44,23 +42,18 @@ body {
     background-color: #ECEDED;
 }
 
->>>>>>> origin/master
 .row{
     margin: 0px;
 }
 
-<<<<<<< HEAD
 #instructions {
     padding: 10px;
 }
 
-=======
->>>>>>> origin/master
 .form{
     background-color: #FFFFDF;
 }
 
-<<<<<<< HEAD
 /* label color */
 .input-field label {
     color: #333333;
@@ -87,7 +80,6 @@ body {
     color:#333333;
   }  
 
-=======
 .input-field label {
     color: #777777;
   }
@@ -123,7 +115,6 @@ body {
     margin: 0 0 15px 10px;
 }  
 
->>>>>>> origin/master
 .info{
     background-color: blueviolet;
 }
