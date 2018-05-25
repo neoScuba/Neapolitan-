@@ -34,11 +34,9 @@ $("#submitBtn").on("click", function () {
         console.log("SbmitBtn::onClick::ajax::fail:: Invalid address");
     })
 });
-
-$(function () {
+var searchTerm = "Apple";
 
     $('#search').on('click', function () {
-        var searchTerm = $('#searchTerm').val();
         var url = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + searchTerm + "&format=json&callback=?";
         $.ajax({
             url: url,
@@ -49,8 +47,8 @@ $(function () {
             },
 
         })
-        .done(function() {
-            console.log("success");
+        .done(function(response) {
+            console.log(response);
         })
         .fail(function() {
             console.log("error");
@@ -59,4 +57,3 @@ $(function () {
             console.log('complete');
         });
     });
-});
