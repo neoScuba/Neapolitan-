@@ -2,14 +2,14 @@ var apiKey = "AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4";
 var baseUrl = "https://www.googleapis.com/civicinfo/v2/voterinfo?key=AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4&address="
 //https://www.googleapis.com/civicinfo/v2/voterinfo?key=AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4&address=1263%20Pacific%20Ave.%20Kansas%20City%20KS&electionId=2000   
 
-$("#submitBtn").on("click",function(){
+$("#submitBtn").on("click", function () {
     var state = $("#stateId").val().trim();
     var city = $("#cityId").val().trim();
     var zip = $("#zipId").val().trim();
     var street = $("#streetId").val().trim();
 
     var address = street + "%20" + state + "%20" + city + "%20" + zip;
-    address = address.replace(/ /g,"%20");
+    address = address.replace(/ /g, "%20");
 
     $("#stateId").val("");
     $("#cityId").val("");
@@ -25,13 +25,38 @@ $("#submitBtn").on("click",function(){
         console.log("SbmitBtn::onClick::ajax::done:: Valid Address")
         var candidateList = response.contests[0].candidates;
         var office = response.contests[0].office;
-        for(var candidateIndex=0; candidateIndex<candidateList.length; candidateIndex++){
+        for (var candidateIndex = 0; candidateIndex < candidateList.length; candidateIndex++) {
             var candidate = $("<a class='collection-item candidate'></a>");
             $(candidate).text(candidateList[candidateIndex].name);
             $("#candidateListId").append(candidate);
-        }        
-    }).fail(function(response){
+        }
+    }).fail(function (response) {
         console.log("SbmitBtn::onClick::ajax::fail:: Invalid address");
     })
 });
 
+$(function () {
+
+    $('#search').on('click', function () {
+        var searchTerm = $('#searchTerm').val();
+        var url = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + searchTerm + "&format=json&callback=?";
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            data: function (data, status, jqXHR) {
+                console.log(data)
+            },
+
+        })
+        .done(function() {
+            console.log("success");
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log('complete');
+        });
+    });
+});
