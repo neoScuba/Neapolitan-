@@ -1,38 +1,50 @@
 var apiKey = "AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4";
 var baseUrl = "https://www.googleapis.com/civicinfo/v2/voterinfo?key=AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4&address="
-//https://www.googleapis.com/civicinfo/v2/voterinfo?key=AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4&address=1263%20Pacific%20Ave.%20Kansas%20City%20KS&electionId=2000   
+//https://www.googleapis.com/civicinfo/v2/voterinfo?key=AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4&address=92612
 // ocd-division/country:us/state:nc/county:wake
+// https://www.googleapis.com/civicinfo/v2/representatives/ocd-division%2Fcountry%3Aus%2Fstate%3Anc%2Fcounty%3Awake?key=AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4
 //http://maps.googleapis.com/maps/api/geocode/json?address=92612&sensor=true
 $("#submitBtn").on("click", function () {
     var zip = $("#zipId").val().trim();
-    var ocid = zip2Ocid(zip);
-    // var candidateList = ocid2CandidateList(ocid);
+    var ocdid = zip2ocdid(zip);
+    var candidateList = ocdid2CandidateList(ocdid);
 });
 
-function zip2Ocid (potentialZip){
-        if (potentialZip.length == 5 && !isNaN(potentialZip)){
-            $.ajax({
-                url: "http://maps.googleapis.com/maps/api/geocode/json?address="+potentialZip+"&sensor=true",
-                method: 'GET',
-            }).done(function (response) {
-                console.log("zip2CityCounty::done:: Valid zip")
-                console.log(response.results["0"].address_components);
-            }).fail(function (response) {
-                console.log("zip2CityCounty::done:: Not valid zip");
-            })
-        
-        }
-    };
-function ocid2CandidateList(ocid){
+function zip2ocdid (potentialZip){
+    var ocdid = false;
+    if (potentialZip.length == 5 && !isNaN(potentialZip)){
+        $.ajax({
+            url: "http://maps.googleapis.com/maps/api/geocode/json?address="+potentialZip+"&sensor=true",
+            method: 'GET',
+            async:false,
+        }).done(function (response) {
+            console.log("zip2CityCounty::done:: Valid zip")
+            console.log(response.results["0"].address_components);
+            var locationInfo = response.results["0"].address_components;
+            var country = locationInfo["4"].short_name.toLowerCase();
+            var state   = locationInfo["3"].short_name.toLowerCase();
+            var county  = locationInfo["2"].short_name.toLowerCase().split(" ")[0];
+            ocdid = "ocd-division/country:"+country+"/state:"+state+"/county:"+county;
+            ocdid = ocdid.replace(/:/g,"%3A");
+            ocdid = ocdid.replace(/\//ig, "%2F");
+            console.log(ocdid);     
+        })  
+    }
+    return ocdid;
+};
 
+function ocdid2CandidateList(ocdid){
+    URL = "https://www.googleapis.com/civicinfo/v2/representatives/"+ocdid+"?key="+apiKey;
+    console.log("URL:"+ URL);
     $.ajax({
-        url: Url,
+        url: URL,
         method: 'GET',
+        async:false,
     }).done(function (response) {
-        console.log("ocid2CandidateList::ajax::done")
+        console.log("ocdid2CandidateList::ajax::done")
         console.log(response);
     }).fail(function (response) {
-        console.log("ocid2CandidateList::ajax::fail");
+        console.log("ocdid2CandidateList::ajax::fail");
     })
 };
 
