@@ -19,25 +19,24 @@ function zip2ocdid (potentialZip){
             async:false,
         }).done(function (response) {
             console.log("zip2CityCounty::done:: Valid zip")
-            console.log(response.results["0"].address_components);
+            console.log(response.results);
             var locationInfo = response.results["0"].address_components;
             var country = locationInfo["4"].short_name.toLowerCase();
             var state   = locationInfo["3"].short_name.toLowerCase();
-            var county  = locationInfo["2"].short_name.toLowerCase().split(" ")[0];
-            ocdid = "ocd-division/country:"+country+"/state:"+state+"/county:"+county;
+            var city  = locationInfo["1"].short_name.toLowerCase();
+            ocdid = "ocd-division/country:"+country+"/state:"+state+"/place:"+city;
             ocdid = ocdid.replace(/:/g,"%3A");
             ocdid = ocdid.replace(/\//ig, "%2F");
-            console.log(ocdid);     
-        })  
+            ocdid = ocdid.replace(" ", "_");
+            console.log(ocdid);
+        })
     }
     return ocdid;
 };
 
 function ocdid2CandidateList(ocdid){
-    URL = "https://www.googleapis.com/civicinfo/v2/representatives/"+ocdid+"?key="+apiKey;
-    console.log("URL:"+ URL);
     $.ajax({
-        url: URL,
+        url: "https://www.googleapis.com/civicinfo/v2/representatives/"+ocdid+"?key="+apiKey,
         method: 'GET',
         async:false,
     }).done(function (response) {
