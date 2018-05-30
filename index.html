@@ -39,19 +39,20 @@
                 </div>
                 <div class="col s4 form">
                     <div class="row">
-                        <div class="inupt-field col s12">
+                        <!-- <div class="inupt-field col s12"> -->
+                                <!-- <a href="https://en.wikipedia.org/wiki/Main_Page" id="linksfromWiki" target="iframe_a">Wikipedia</a> -->
                             <div class="collection" id="candidateListId">
                                 <a href="https://en.wikipedia.org/wiki/Main_Page" id="linksfromWiki" target="iframe_a">Wikipedia</a>
                             </div>
-                        </div>
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>
             <div>
             <button id="search" class="btn btn-primary">Submit</button>
-            <div id="wikiContent">
+            <div class="resp-container" id="wikiContent">
                 <!--Put Api here to create content-->
-                <iframe src="demo_iframe.htm" name="iframe_a" height="600px" class="col s8 info"></iframe>
+                <iframe class="resp-iframe" src="demo_iframe.htm" name="iframe_a" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
             </div>
         </div>
     </div>
