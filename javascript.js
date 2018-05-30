@@ -1,6 +1,7 @@
 var apiKey = "AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4";
 var dropdownDiv = "#candidateListId";
 
+//=====================================================================================================================================
 //-------------------------FUNCTIONS-------------------------
 
 //------ ocdid2CandidateList: uses ocdid to make civic api request, returns repList
@@ -21,6 +22,7 @@ function address2CandidateList(state, city, zip, street){
     return result;
 };
 
+//=====================================================================================================================================
 //------ displayRepList: turns list items {repObj} to buttons and appends to buttonDiv
 function displayReps(apiResponse){
     var offices = apiResponse.offices;
@@ -75,7 +77,6 @@ function officeName2Id(name){
     var id = name.trim().replace(/ /g,"_") + "_DropDown";
     return id;
 };
-
 //-------------------------ON.CLICK CALLS--------------------
 
 $("#submitBtn").on("click", function () {
