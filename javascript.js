@@ -4,39 +4,17 @@ var repBtnClass = "representative";
 
 //-------------------------FUNCTIONS-------------------------
 
-//------ zip2ocdid: if zip is valid turn it to an ocidid using map api, return ocdid
-function zip2ocdid (potentialZip){
-    var ocdid = false;
-    if (potentialZip.length == 5 && !isNaN(potentialZip)){
-        $.ajax({
-            url: "http://maps.googleapis.com/maps/api/geocode/json?address="+potentialZip+"&sensor=true",
-            method: 'GET',
-            async:false,
-        }).done(function (response) {
-            console.log("zip2CityCounty::done::Valid zip")
-            var locationInfo = response.results["0"].address_components;
-            //we can grab the county and display it somewhere
-            var country = locationInfo["4"].short_name.toLowerCase();
-            var state   = locationInfo["3"].short_name.toLowerCase();
-            var city  = locationInfo["1"].short_name.toLowerCase();
-            ocdid = "ocd-division/country:"+country+"/state:"+state+"/place:"+city;
-            ocdid = ocdid.replace(/:/g,"%3A");
-            ocdid = ocdid.replace(/\//ig, "%2F");
-            ocdid = ocdid.replace(" ", "_");
-            $(buttonDiv).empty();
-        })
-    }
-    return ocdid;
-};
-
 //------ ocdid2CandidateList: uses ocdid to make civic api request, returns repList
-function ocdid2CandidateList(ocdid){
+function ocdid2CandidateList(state, city, zip, street){
     var repList;
+    var address = street.trim()+"%20"+zip.trim()+"%20"+city.trim()+"%20"+state.trim();
+    var address2 = address.replace(" ", "%20");
     $.ajax({
-        url: "https://www.googleapis.com/civicinfo/v2/representatives/"+ocdid+"?key="+apiKey,
+        url: "https://www.googleapis.com/civicinfo/v2/representatives?"+"address="+address2+"&key="+apiKey,
         method: 'GET',
         async:false,
     }).done(function (response) {
+        console.log(response);
         console.log("ocdid2CandidateList::ajax::done::Valid Ocdid");
         repList = response.officials;
     }).fail(function (response) {
@@ -89,10 +67,13 @@ function wikiSearch(searchTerm){
 //-------------------------ON.CLICK CALLS--------------------
 
 $("#submitBtn").on("click", function () {
+    var state = $("#stateId").val().trim();
+    var city = $("#cityId").val().trim();
     var zip = $("#zipId").val().trim();
-    var ocdid = zip2ocdid(zip);
-    var representativeList = ocdid2CandidateList(ocdid);
-    displayRepList(representativeList);
+    var street = $("#streetId").val().trim();
+    var representativeList = ocdid2CandidateList(state, city, zip, street);
+    console.log(representativeList);
+    // displayRepList(representativeList);
 });
 
 // $("."+repBtnClass).on("click", function () {
