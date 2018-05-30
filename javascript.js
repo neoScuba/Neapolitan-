@@ -1,5 +1,6 @@
 var apiKey = "AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4";
 var buttonDiv = "#candidateListId";
+var repBtnClass = "representative";
 
 //-------------------------FUNCTIONS-------------------------
 
@@ -56,32 +57,32 @@ function displayRepList(repList){
 //------ makeBtn: turns {repObj} to button, returns button
 function makeBtn(repObject){
     // <a href="https://en.wikipedia.org/wiki/Main_Page" id="linksfromWiki" target="iframe_a">Wikipedia</a>
-    var btn = $("<a>");
+    var btn = $("<button type='button'></button>");
     $(btn).text(repObject.name);
-    $(btn).attr("href","https://en.wikipedia.org/w/api.php?action=opensearch&search=" + repObject.name + "&format=json&callback=?");
+    $(btn).addClass(repBtnClass);
+    // $(btn).attr("class","representative");
     return btn;
 };
 
 //------ wikiSearch: 
 function wikiSearch(searchTerm){
-    $('#search').on('click', function () {
-        $.ajax({
-            url: 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + searchTerm + "&format=json&callback=?",
-            type: 'GET',
-            dataType: 'json',
-            data: function (data, status, jqXHR) {
-                console.log(data);
-            },
-        })
-        .done(function(response) {
-            console.log(response);
-        })
-        .fail(function() {
-            console.log("error");
-        })
-        .always(function() {
-            console.log('complete');
-        });
+    console.log("in wikiSearch with term:" + searchTerm);
+    $.ajax({
+        url: 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + searchTerm + "&format=json&callback=?",
+        type: 'GET',
+        dataType: 'json',
+        data: function (data, status, jqXHR) {
+            console.log(data);
+        },
+    })
+    .done(function(response) {
+        console.log(response);
+    })
+    .fail(function() {
+        console.log("error");
+    })
+    .always(function() {
+        console.log('complete');
     });
 };
 
@@ -94,9 +95,11 @@ $("#submitBtn").on("click", function () {
     displayRepList(representativeList);
 });
 
-$(".representative").on("click",function(){
-    console.log("searching:" +$(this).text());
-    // wikiSearch($(this).text());
-});
+// $("."+repBtnClass).on("click", function () {
+//     console.log("button pressed!");
+// });
 
+$(document).on("click", "."+repBtnClass, function() {
+    console.log("button pressed!");
+});
 wikiSearch("pie");
