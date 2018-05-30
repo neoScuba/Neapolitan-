@@ -55,9 +55,10 @@ function displayRepList(repList){
 
 //------ makeBtn: turns {repObj} to button, returns button
 function makeBtn(repObject){
-    var btn = $("<button type='button'></button>");
+    // <a href="https://en.wikipedia.org/wiki/Main_Page" id="linksfromWiki" target="iframe_a">Wikipedia</a>
+    var btn = $("<a>");
     $(btn).text(repObject.name);
-    $(btn).attr("class","representative");
+    $(btn).attr("href","https://en.wikipedia.org/w/api.php?action=opensearch&search=" + repObject.name + "&format=json&callback=?");
     return btn;
 };
 
@@ -84,7 +85,7 @@ function wikiSearch(searchTerm){
     });
 };
 
-//-------------------------ON.CLICK CALLS-------------------------
+//-------------------------ON.CLICK CALLS--------------------
 
 $("#submitBtn").on("click", function () {
     var zip = $("#zipId").val().trim();
@@ -97,3 +98,5 @@ $(".representative").on("click",function(){
     console.log("searching:" +$(this).text());
     // wikiSearch($(this).text());
 });
+
+wikiSearch("pie");
