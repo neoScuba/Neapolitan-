@@ -1,6 +1,7 @@
 var apiKey = "AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4";
 var dropdownDiv = "#candidateListId";
 
+//=====================================================================================================================================
 //-------------------------FUNCTIONS-------------------------
 
 //------ ocdid2CandidateList: uses ocdid to make civic api request, returns repList
@@ -21,6 +22,7 @@ function address2CandidateList(state, city, zip, street){
     return result;
 };
 
+//=====================================================================================================================================
 //------ displayRepList: turns list items {repObj} to buttons and appends to buttonDiv
 function displayReps(apiResponse){
     var offices = apiResponse.offices;
@@ -46,6 +48,7 @@ function displayReps(apiResponse){
     }
 };
 
+//=====================================================================================================================================
 //------ makeBtn: turns {repObj} to button, returns button
 function makeBtn(repObject){
     // <a href="https://en.wikipedia.org/wiki/Main_Page" id="linksfromWiki" target="iframe_a">Wikipedia</a>
@@ -56,6 +59,7 @@ function makeBtn(repObject){
     return btn;
 };
 
+//=====================================================================================================================================
 //------ wikiSearch: 
 function wikiSearch(searchTerm){
     console.log("in wikiSearch with term:" + searchTerm);
@@ -78,6 +82,7 @@ function wikiSearch(searchTerm){
     });
 };
 
+//=====================================================================================================================================
 //-------------------------ON.CLICK CALLS--------------------
 
 $("#submitBtn").on("click", function () {
@@ -95,3 +100,8 @@ $(document).on("click",".dropdown-trigger",function(){
 });
 wikiSearch("pie");
 
+// click on the drop down menus to display a random wikipage in the iframe
+$(dropdownDiv).on('click', function() {
+    console.log('results button test!');
+    $('#wikiContent').attr('src', 'https://en.wikipedia.org/wiki/Special:Random')
+});

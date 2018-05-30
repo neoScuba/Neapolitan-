@@ -32,7 +32,7 @@
                             <div class="input-field col s12">
                                 <div class="input-field col s12">
                                     <input id="stateId" type="text" class="validate">
-                                    <label for="stateId">State</label>
+                                    <label for="stateId">State (Abbreviate)</label>
                                 </div>
                                 <div class="input-field col s12">
                                     <input id="cityId" type="text" class="validate">
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="input-field col s12">
                                     <input id="streetId" type="text" class="validate">
-                                    <label for="streetId">Street</label>
+                                    <label for="streetId">Address/Street</label>
                                 </div>
                             </div>
                             <a class="waves-effect waves-light btn-small" id="submitBtn">Submit</a>
@@ -62,11 +62,9 @@
                     </div>
                 </div>
             </div>
-            <div>
-            <button id="search" class="btn btn-primary">Submit</button>
-            <div class="resp-container" id="wikiContent">
+            <div class="resp-container">
                 <!--Put Api here to create content-->
-                <iframe class="resp-iframe" src="demo_iframe.htm" name="iframe_a" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+                <iframe class="resp-iframe" id="wikiContent" src="demo_iframe.htm" name="iframe_a" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
             </div>
         </div>
     </div>
