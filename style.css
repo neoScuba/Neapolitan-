@@ -1,7 +1,7 @@
-.container {
-    /*width: 960px;
-    margin: 0px auto;*/
-}
+/* container {
+    width: 960px;
+    margin: 0px auto;
+} */
 
 .header {
     font-size: 20px;
@@ -21,9 +21,6 @@
 
 .content{
     background-color: #cfd8dc;
-}
-
-    font-size: 30px;
 }
 
 .header,.footer{
