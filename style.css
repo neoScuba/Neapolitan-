@@ -13,12 +13,6 @@
     padding: 10px;
 }
 
-.footer {
-    position:absolute;
-    bottom:0;
-    width:100%;
-}
-
 .content{
     background-color: #cfd8dc;
 }
@@ -30,7 +24,7 @@
 }
 
 .footer {
-    position:absolute;
+    position: relative;;
     bottom:0;
     width:100%;
 }
@@ -47,7 +41,7 @@ body {
     padding: 10px;
 }
 
-.form{
+.form {
     background-color: #FFFFDF;
 }
 
@@ -112,11 +106,42 @@ body {
     margin: 0 0 15px 10px;
 }  
 
-.info{
-    background-color: blueviolet;
+.resp-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 100%;
+}
+
+.resp-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 
 #submitBtn {
     background-color: green;
     margin: 0 0 15px 10px;
+}
+
+/* .collection  */
+/* .collection {
+    background-color: white;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.collectionItem {
+    background-color: white;
+    padding: 10px;
+    text-decoration: none;
+} */
+
+#candidateListId {
+    background-color: white;
+    padding: 10px 15px 10px 10px;
+    text-decoration: none;
+
 }
