@@ -1,12 +1,11 @@
 var apiKey = "AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4";
-var buttonDiv = "#candidateListId";
-var repBtnClass = "representative";
+var dropdownDiv = "#candidateListId";
 
 //-------------------------FUNCTIONS-------------------------
 
 //------ ocdid2CandidateList: uses ocdid to make civic api request, returns repList
-function ocdid2CandidateList(state, city, zip, street){
-    var repList;
+function address2CandidateList(state, city, zip, street){
+    var result;
     var address = street.trim()+"%20"+zip.trim()+"%20"+city.trim()+"%20"+state.trim();
     var address2 = address.replace(" ", "%20");
     $.ajax({
@@ -14,21 +13,36 @@ function ocdid2CandidateList(state, city, zip, street){
         method: 'GET',
         async:false,
     }).done(function (response) {
-        console.log(response);
         console.log("ocdid2CandidateList::ajax::done::Valid Ocdid");
-        repList = response.officials;
+        result = response;
     }).fail(function (response) {
         console.log("ocdid2CandidateList::ajax::fail::Invalid Ocdid");
     })
-    return repList;
+    return result;
 };
 
 //------ displayRepList: turns list items {repObj} to buttons and appends to buttonDiv
-function displayRepList(repList){
-    for(var repIndex = 0; repIndex < repList.length; repIndex++){
-        // console.log(repList[repIndex]);
-        var repBtn = makeBtn(repList[repIndex]);
-        $(buttonDiv).append($(repBtn));
+function displayReps(apiResponse){
+    var offices = apiResponse.offices;
+        
+    for (var officeIndex=0; officeIndex<offices.length; officeIndex++){
+        var office = offices[officeIndex];
+
+        var dropDownId = office.name.trim().replace(" ","_") + "_DropDown";
+        var dropDown = $("<ol calss='dropdown-content'></ol>");
+        dropDown.attr("id",dropDownId);
+
+        var officeHead = $("<a class='dropdown-trigger btn' data-target='dropdown1'></a>");
+        officeHead.text(office.name);
+        officeHead.attr("data-target", dropDownId);
+
+        for (officialIndex = 0; officialIndex<office.officialIndices.length; officialIndex++){
+            var officialObj = apiResponse.officials[office.officialIndices[officialIndex]];
+            var official = $("<li>");
+            official.text(office.name)
+            $(dropDown).append(official);
+        }
+        $(dropdownDiv).append(officeHead);
     }
 };
 
@@ -71,16 +85,13 @@ $("#submitBtn").on("click", function () {
     var city = $("#cityId").val().trim();
     var zip = $("#zipId").val().trim();
     var street = $("#streetId").val().trim();
-    var representativeList = ocdid2CandidateList(state, city, zip, street);
-    console.log(representativeList);
-    // displayRepList(representativeList);
+    var apiResponse = address2CandidateList(state, city, zip, street);
+    console.log(apiResponse);
+    displayReps(apiResponse);
 });
 
-// $("."+repBtnClass).on("click", function () {
-//     console.log("button pressed!");
-// });
-
-$(document).on("click", "."+repBtnClass, function() {
-    console.log("button pressed!");
+$(document).on("click",".dropdown-trigger",function(){
+    $(this).dropDown();
 });
+
 wikiSearch("pie");
