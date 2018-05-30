@@ -7,7 +7,7 @@ var dropdownDiv = "#candidateListId";
 function address2CandidateList(state, city, zip, street){
     var result;
     var address = street.trim()+"%20"+zip.trim()+"%20"+city.trim()+"%20"+state.trim();
-    var address2 = address.replace(" ", "%20");
+    var address2 = address.replace(/ /g, "%20");
     $.ajax({
         url: "https://www.googleapis.com/civicinfo/v2/representatives?"+"address="+address2+"&key="+apiKey,
         method: 'GET',
@@ -27,33 +27,23 @@ function displayReps(apiResponse){
         
     for (var officeIndex=0; officeIndex<offices.length; officeIndex++){
         var office = offices[officeIndex];
+        var dropDownId = office.name.trim().replace(/ /g,"_") + "_DropDown";
+        var dropDownContent = $("<ul class='dropdown-content'></ul>");
+        dropDownContent.attr("id",dropDownId);
 
-        var dropDownId = office.name.trim().replace(" ","_") + "_DropDown";
-        var dropDown = $("<ol calss='dropdown-content'></ol>");
-        dropDown.attr("id",dropDownId);
-
-        var officeHead = $("<a class='dropdown-trigger btn' data-target='dropdown1'></a>");
-        officeHead.text(office.name);
-        officeHead.attr("data-target", dropDownId);
+        var dropDownHead = $("<a class='dropdown-button btn'></a>");
+        dropDownHead.text(office.name);
+        dropDownHead.attr("data-activates", dropDownId);
 
         for (officialIndex = 0; officialIndex<office.officialIndices.length; officialIndex++){
             var officialObj = apiResponse.officials[office.officialIndices[officialIndex]];
             var official = $("<li>");
-            official.text(office.name)
-            $(dropDown).append(official);
+            official.text(officialObj.name);
+            $(dropDownContent).append(official);
         }
-        $(dropdownDiv).append(officeHead);
+        $(dropDownHead).append(dropDownContent);
+        $(dropdownDiv).append(dropDownHead);
     }
-};
-
-//------ makeBtn: turns {repObj} to button, returns button
-function makeBtn(repObject){
-    // <a href="https://en.wikipedia.org/wiki/Main_Page" id="linksfromWiki" target="iframe_a">Wikipedia</a>
-    var btn = $("<button type='button'></button>");
-    $(btn).text(repObject.name);
-    $(btn).addClass(repBtnClass);
-    // $(btn).attr("class","representative");
-    return btn;
 };
 
 //------ wikiSearch: 
@@ -86,12 +76,11 @@ $("#submitBtn").on("click", function () {
     var zip = $("#zipId").val().trim();
     var street = $("#streetId").val().trim();
     var apiResponse = address2CandidateList(state, city, zip, street);
-    console.log(apiResponse);
     displayReps(apiResponse);
 });
 
-$(document).on("click",".dropdown-trigger",function(){
-    $(this).dropDown();
+$(document).on("click",".dropdown-button",function(){
+    console.log(this);
+    $(this).show();
+//    $(this).dropdown();
 });
-
-wikiSearch("pie");
