@@ -27,11 +27,12 @@ function displayReps(apiResponse){
         
     for (var officeIndex=0; officeIndex<offices.length; officeIndex++){
         var office = offices[officeIndex];
-        var dropDownId = office.name.trim().replace(/ /g,"_") + "_DropDown";
-        var dropDownContent = $("<ul class='dropdown-content'></ul>");
+        var newDiv = $("<div></div>");
+        var dropDownId = officeName2Id(office.name);
+        var dropDownContent = $("<ul class='dropdowncontent'></ul>");
         dropDownContent.attr("id",dropDownId);
 
-        var dropDownHead = $("<a class='dropdown-button btn'></a>");
+        var dropDownHead = $("<button class='dropdownbutton btn' data-show=0></button>");
         dropDownHead.text(office.name);
         dropDownHead.attr("data-activates", dropDownId);
 
@@ -41,8 +42,10 @@ function displayReps(apiResponse){
             official.text(officialObj.name);
             $(dropDownContent).append(official);
         }
-        $(dropDownHead).append(dropDownContent);
-        $(dropdownDiv).append(dropDownHead);
+        $(dropDownContent).hide();
+        $(newDiv).append(dropDownHead);
+        $(newDiv).append(dropDownContent);
+        $(dropdownDiv).append(newDiv);
     }
 };
 
@@ -68,6 +71,11 @@ function wikiSearch(searchTerm){
     });
 };
 
+function officeName2Id(name){
+    var id = name.trim().replace(/ /g,"_") + "_DropDown";
+    return id;
+};
+
 //-------------------------ON.CLICK CALLS--------------------
 
 $("#submitBtn").on("click", function () {
@@ -79,8 +87,14 @@ $("#submitBtn").on("click", function () {
     displayReps(apiResponse);
 });
 
-$(document).on("click",".dropdown-button",function(){
+$(document).on("click",".dropdownbutton",function(){
     console.log(this);
-    $(this).show();
-//    $(this).dropdown();
+    if (!$(this).data("data-show")){
+        $("#"+officeName2Id($(this).text())).show();
+        $(this).data("data-show",1);
+    }
+    else{
+        $("#"+officeName2Id($(this).text())).hide();        
+        $(this).data("data-show",0);
+    }
 });
