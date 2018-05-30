@@ -20,11 +20,11 @@
 <body>
     <!-- code goes here -->
     <div class="row header">
-        <div class="col s12">Local Leaders</div>
+        <div class="col s12" >Local Leaders</div>
     </div>
     <div class="row content">
-        <div class="container">
-            <div class="col s4 form">
+        <div class="container col s12">
+            <div class="col s3 form" id="inputForm">
                 <div class="row">
                     <form class="col s12">
                         <div class="row">
@@ -51,7 +51,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col s12 form">
+                <div class="col s12 form" id="wikiForm">
                     <div class="row">
                         <!-- <div class="inupt-field col s12"> -->
                                 <!-- <a href="https://en.wikipedia.org/wiki/Main_Page" id="linksfromWiki" target="iframe_a">Wikipedia</a> -->
@@ -63,7 +63,6 @@
                 </div>
             </div>
             <div>
-            <button id="search" class="btn btn-primary">Submit</button>
             <div class="resp-container" id="wikiContent">
                 <!--Put Api here to create content-->
                 <iframe class="resp-iframe" src="demo_iframe.htm" name="iframe_a" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
