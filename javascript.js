@@ -41,7 +41,10 @@ function displayReps(apiResponse){
         for (officialIndex = 0; officialIndex<office.officialIndices.length; officialIndex++){
             var officialObj = apiResponse.officials[office.officialIndices[officialIndex]];
             var official = $("<li>");
-            official.text(officialObj.name);
+            var link = $("<a target='iframe_a'></a>");
+            $(link).text(officialObj.name);
+            $(link).attr("href", wikiSearch(officialObj.name));
+            $(official).append(link);
             $(dropDownContent).append(official);
         }
         $(dropDownContent).hide();
@@ -53,16 +56,19 @@ function displayReps(apiResponse){
 
 //------ wikiSearch: 
 function wikiSearch(searchTerm){
+    var linkSource = "";
     console.log("in wikiSearch with term:" + searchTerm);
     $.ajax({
         url: 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + searchTerm + "&format=json&callback=?",
         type: 'GET',
         dataType: 'json',
+        async:false,
         data: function (data, status, jqXHR) {
             console.log(data);
         },
     })
     .done(function(response) {
+        linkSource = response[3][0];
         console.log(response);
     })
     .fail(function() {
@@ -71,6 +77,7 @@ function wikiSearch(searchTerm){
     .always(function() {
         console.log('complete');
     });
+    return linkSource; 
 };
 
 function officeName2Id(name){
