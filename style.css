@@ -24,7 +24,7 @@
 }
 
 .footer {
-    position: relative;
+    position: absolute;
     width: 100%;
     /* background-color: #3D9FFF; */
     background-color: red;
