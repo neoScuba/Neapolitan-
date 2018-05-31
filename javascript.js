@@ -55,7 +55,6 @@ function displayReps(apiResponse){
 
 //------ wikiSearch: 
 function wikiSearch(searchTerm){
-    var linkSource = "";
     // console.log("in wikiSearch with term:" + searchTerm);
     $.ajax({
         url: 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + searchTerm + "&format=json&callback=?",
@@ -67,18 +66,14 @@ function wikiSearch(searchTerm){
         },
     })
     .done(function(response) {
-        linkSource = response[3][0];
-        console.log(linkSource);
+        $(wikiContent).attr('src', response[3][0]);
     })
     .fail(function() {
         console.log("error");
     })
     .always(function() {
         // console.log('complete');
-    });
-    console.log("1");
-    console.log(linkSource);
-    return linkSource; 
+    }); 
 };
 
 function officeName2Id(name){
@@ -108,7 +103,5 @@ $(document).on("click",".dropdownbutton",function(){
     }
 });
 $(document).on("click",".repLink",function(){
-    // wikiSearch($(this).text);
-    console.log("Name perssed");
-    console.log(wikiSearch($(this).text()));
+    wikiSearch($(this).text());
     });
