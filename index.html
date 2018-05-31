@@ -31,25 +31,26 @@
                             <p id="instructions"><strong>Insert your current residence to search for your politicians.</strong></p>
 
                         <div class="row">
+                            <p id="instructions"><strong>Insert your current residence to search for your local politicians.</strong></p>
+                            <p id="notification"></p>
+
                             <div class="input-field col s12">
                                 <div class="input-field col s12">
-                                    <input id="streetId" type="text" class="validate">
-                                    <label for="streetId">Address</label>
+                                    <input id="stateId" type="text" maxlength="2" class="validate">
+                                    <label for="stateId">State</label>
                                 </div>
                                 <div class="input-field col s12">
                                     <input id="cityId" type="text" class="validate">
                                     <label for="cityId">City</label>
                                 </div>
                                 <div class="input-field col s12">
-                                    <input id="stateId" type="text" maxlength="2" class="validate">
-                                    <label for="stateId">State</label>
-                                </div>
-
-                                <div class="input-field col s12">
                                     <input id="zipId" type="text" maxlength="5" class="validate">
                                     <label for="zipId">Zip Code</label>
                                 </div>
-
+                                <div class="input-field col s12">
+                                    <input id="streetId" type="text" class="validate">
+                                    <label for="streetId">Address/Street</label>
+                                </div>
                             </div>
                             <a class="waves-effect waves-light btn-small" id="submitBtn">Submit</a>
                         </div>
@@ -64,6 +65,7 @@
             </div>
             <div class="resp-container">
                 <!--Put Api here to create content-->
+                <iframe class="resp-iframe" id="wikiContent" src="https://en.wikipedia.org/wiki/Elections_in_the_United_States" name="iframe_a" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
             </div>
         </div>
     </div>
