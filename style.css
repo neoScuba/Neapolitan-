@@ -1,39 +1,41 @@
-/* container {
-    width: 960px;
-    margin: 0px auto;
-} */
-
 .header {
     font-size: 20px;
 }
 
-.header,.footer{
+/* Container for input form and iFrame*/
+.container {
+    width: 100%;
+}
+
+.header,
+.footer {
     background-color: #3D9FFF;
     text-align: center;
     padding: 10px;
 }
 
-.content{
+.content {
     background-color: #cfd8dc;
 }
 
-.header,.footer{
+.header,
+.footer {
     text-align: center;
     padding: 15px;
     background-color: #478DFF;
 }
 
 .footer {
-    position: relative;;
-    bottom:0;
-    width:100%;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
 
 body {
     background-color: #ECEDED;
 }
 
-.row{
+.row {
     margin: 0px;
 }
 
@@ -46,65 +48,87 @@ body {
 }
 
 /* label color */
+
 .input-field label {
     color: #333333;
-  }
-  /* label focus color */
-  .input-field input[type=text]:focus + label {
+}
+
+/* label focus color */
+
+.input-field input[type=text]:focus+label {
     color: #333333;
-  }
-  /* label underline focus color */
-  .input-field input[type=text]:focus {
+}
+
+/* label underline focus color */
+
+.input-field input[type=text]:focus {
     border-bottom: 1px solid #333333;
     box-shadow: 0 1px 0 0 #333333;
-  }
-  /* valid color */
-  .input-field input[type=text].valid {
+}
+
+/* valid color */
+
+.input-field input[type=text].valid {
     border-bottom: 1px solid #333333;
     box-shadow: 0 1px 0 0 #333333;
-  }
-  /* invalid color */
-  .input-field input[type=text].invalid {
+}
+
+/* invalid color */
+
+.input-field input[type=text].invalid {
     border-bottom: 1px solid #333333;
     box-shadow: 0 1px 0 0 #333333;
-  }.input-field {
-    color:#333333;
-  }  
+}
+
+.input-field {
+    color: #333333;
+}
 
 .input-field label {
     color: #777777;
-  }
-  /* label focus color */
-  .input-field input[type=text]:focus + label {
+}
+
+/* label focus color */
+
+.input-field input[type=text]:focus+label {
     color: #777777;
-  }
-  /* label underline focus color */
-  .input-field input[type=text]:focus {
+}
+
+/* label underline focus color */
+
+.input-field input[type=text]:focus {
     border-bottom: 1px solid #777777;
     box-shadow: 0 1px 0 0 #777777;
-  }
-  /* valid color */
-  .input-field input[type=text].valid {
+}
+
+/* valid color */
+
+.input-field input[type=text].valid {
     border-bottom: 1px solid #777777;
     box-shadow: 0 1px 0 0 #777777;
-  }
-  /* invalid color */
-  .input-field input[type=text].invalid {
+}
+
+/* invalid color */
+
+.input-field input[type=text].invalid {
     border-bottom: 1px solid #777777;
     box-shadow: 0 1px 0 0 #777777;
-  }
-  /* icon prefix focus color */
-  .input-field .prefix.active {
+}
+
+/* icon prefix focus color */
+
+.input-field .prefix.active {
     color: #777777;
-  }
-  .input-field {
-    color:#777777;
-  }  
+}
+
+.input-field {
+    color: #777777;
+}
 
 #submitBtn {
     background-color: #6282FF;
     margin: 0 0 15px 10px;
-}  
+}
 
 .resp-container {
     position: relative;
@@ -126,22 +150,25 @@ body {
     margin: 0 0 15px 10px;
 }
 
-/* .collection  */
-/* .collection {
-    background-color: white;
-    padding: 10px;
-    text-decoration: none;
-}
-
-.collectionItem {
-    background-color: white;
-    padding: 10px;
-    text-decoration: none;
-} */
-
 #candidateListId {
     background-color: white;
     padding: 10px 15px 10px 10px;
     text-decoration: none;
-
 }
+
+/* Drow Down Buttons after address is entered*/
+
+.dropdownbutton {
+    text-align: center;
+    display: block;
+    font-size: 12px;
+    background: #3D9FFF;
+    width: 100%;
+    font-family: Georgia;
+    margin: 5px 0px;
+}
+
+.collection {
+    padding: 10px;
+}
+    
