@@ -172,4 +172,8 @@ body {
 .collection {
     padding: 10px;
 }
-    
+
+#notification{
+    color: red;
+    text-align: center;
+}
