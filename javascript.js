@@ -44,6 +44,8 @@ function displayReps(apiResponse){
 
 //------ wikiSearch: display wiki results of person clicked in iframe
 function wikiSearch(searchTerm){
+    $("#wikiContent").hide();
+
     // console.log("in wikiSearch with term:" + searchTerm);
     $.ajax({
         url: 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + searchTerm + "&format=json&callback=?",
@@ -56,6 +58,9 @@ function wikiSearch(searchTerm){
     })
     .done(function(response) {
         $("#wikiContent").attr('src', response[3][0]);
+        $("#wikiContent").on("load",function(){
+            $("#wikiContent").show();            
+        });
     })
 };
 
@@ -98,3 +103,4 @@ $(document).on("click",".dropdownbutton",function(){
 $(document).on("click",".repLink",function(){
     wikiSearch($(this).text());
 });
+
