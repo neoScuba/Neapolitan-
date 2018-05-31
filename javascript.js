@@ -43,15 +43,11 @@ function displayReps(apiResponse){
 
 //------ wikiSearch: display wiki results of person clicked in iframe
 function wikiSearch(searchTerm){
-    // console.log("in wikiSearch with term:" + searchTerm);
     $.ajax({
         url: 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + searchTerm + "&format=json&callback=?",
         type: 'GET',
         dataType: 'json',
         async:false,
-        data: function (data, status, jqXHR) {
-            console.log(data);
-        },
     })
     .done(function(response) {
         $("#wikiContent").attr('src', response[3][0]);
