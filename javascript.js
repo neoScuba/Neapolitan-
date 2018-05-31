@@ -41,7 +41,9 @@ function displayReps(apiResponse){
         for (officialIndex = 0; officialIndex<office.officialIndices.length; officialIndex++){
             var officialObj = apiResponse.officials[office.officialIndices[officialIndex]];
             var official = $("<li>");
-            official.text(officialObj.name);
+            var link = $("<a href='#' target='iframe_a' class='repLink'></a>");
+            $(link).text(officialObj.name);
+            $(official).append(link);
             $(dropDownContent).append(official);
         }
         $(dropDownContent).hide();
@@ -53,24 +55,25 @@ function displayReps(apiResponse){
 
 //------ wikiSearch: 
 function wikiSearch(searchTerm){
-    console.log("in wikiSearch with term:" + searchTerm);
+    // console.log("in wikiSearch with term:" + searchTerm);
     $.ajax({
         url: 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + searchTerm + "&format=json&callback=?",
         type: 'GET',
         dataType: 'json',
+        async:false,
         data: function (data, status, jqXHR) {
             console.log(data);
         },
     })
     .done(function(response) {
-        console.log(response);
+        $(wikiContent).attr('src', response[3][0]);
     })
     .fail(function() {
         console.log("error");
     })
     .always(function() {
-        console.log('complete');
-    });
+        // console.log('complete');
+    }); 
 };
 
 function officeName2Id(name){
@@ -99,5 +102,6 @@ $(document).on("click",".dropdownbutton",function(){
         $(this).data("data-show",0);
     }
 });
-
-wikiSearch("Apple Pie");
+$(document).on("click",".repLink",function(){
+    wikiSearch($(this).text());
+    });

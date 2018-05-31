@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!--Need to fix!!!!!!-->
+<!--Rep list doesn't refresh when a new address is entered-->
+<!--Rep boxes don't always fit within all screen sizes-->
+
 <head>
     <!-- Materialize::CDN::Link::css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
@@ -31,15 +35,15 @@
                             <p id="instructions"><strong>Insert your current residence to search for your local politicians.</strong></p>
                             <div class="input-field col s12">
                                 <div class="input-field col s12">
-                                    <input id="stateId" type="text" class="validate">
-                                    <label for="stateId">State (Abbreviate)</label>
+                                    <input id="stateId" type="text" maxlength="2" class="validate">
+                                    <label for="stateId">State</label>
                                 </div>
                                 <div class="input-field col s12">
                                     <input id="cityId" type="text" class="validate">
                                     <label for="cityId">City</label>
                                 </div>
                                 <div class="input-field col s12">
-                                    <input id="zipId" type="text" class="validate">
+                                    <input id="zipId" type="text" maxlength="5" class="validate">
                                     <label for="zipId">Zip Code</label>
                                 </div>
                                 <div class="input-field col s12">
