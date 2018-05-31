@@ -26,14 +26,13 @@
 .footer {
     position: relative;
     width: 100%;
-    /* background-color: #3D9FFF; */
     background-color: red;
     text-align: center;
     padding: 10px;
 }
 
-h1 {
-    font-family: 'Gentium Basic', serif, bold;
+.pageTitle {
+    font-family: 'Gentium Basic', serif;
     margin-top: 0;
     padding-top: 15px;
     text-align: center;
