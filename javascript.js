@@ -99,3 +99,5 @@ $(document).on("click",".dropdownbutton",function(){
         $(this).data("data-show",0);
     }
 });
+
+wikiSearch("Apple Pie");
