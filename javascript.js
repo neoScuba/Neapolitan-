@@ -1,32 +1,20 @@
-var apiKey = "AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4";
-var dropdownDiv = "#candidateListId";
-
-//=====================================================================================================================================
-//-------------------------FUNCTIONS-------------------------
-
+//============================= FUNCTIONS =========================================
 //------ ocdid2CandidateList: uses ocdid to make civic api request, returns repList
-function address2CandidateList(state, city, zip, street){
-    var result;
-    var address = street.trim()+"%20"+zip.trim()+"%20"+city.trim()+"%20"+state.trim();
-    var address2 = address.replace(/ /g, "%20");
+function address2CandidateList(address){
     $.ajax({
-        url: "https://www.googleapis.com/civicinfo/v2/representatives?"+"address="+address2+"&key="+apiKey,
+        url: "https://www.googleapis.com/civicinfo/v2/representatives?"+"address="+address+"&key=AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4",
         method: 'GET',
-        async:false,
     }).done(function (response) {
-        console.log("ocdid2CandidateList::ajax::done::Valid Ocdid");
-        result = response;
+        displayReps(response);
     }).fail(function (response) {
-        console.log("ocdid2CandidateList::ajax::fail::Invalid Ocdid");
+        //Display Wrong address?
     })
-    return result;
 };
 
-//=====================================================================================================================================
 //------ displayRepList: turns list items {repObj} to buttons and appends to buttonDiv
 function displayReps(apiResponse){
+    $("#candidateListId").empty();
     var offices = apiResponse.offices;
-        
     for (var officeIndex=0; officeIndex<offices.length; officeIndex++){
         var office = offices[officeIndex];
         var newDiv = $("<div></div>");
@@ -49,11 +37,11 @@ function displayReps(apiResponse){
         $(dropDownContent).hide();
         $(newDiv).append(dropDownHead);
         $(newDiv).append(dropDownContent);
-        $(dropdownDiv).append(newDiv);
+        $("#candidateListId").append(newDiv);
     }
 };
 
-//------ wikiSearch: 
+//------ wikiSearch: display wiki results of person clicked in iframe
 function wikiSearch(searchTerm){
     // console.log("in wikiSearch with term:" + searchTerm);
     $.ajax({
@@ -66,33 +54,35 @@ function wikiSearch(searchTerm){
         },
     })
     .done(function(response) {
-        $(wikiContent).attr('src', response[3][0]);
+        $("#wikiContent").attr('src', response[3][0]);
     })
-    .fail(function() {
-        console.log("error");
-    })
-    .always(function() {
-        // console.log('complete');
-    }); 
 };
 
+//------ HELPER FUNCTIONS
 function officeName2Id(name){
     var id = name.trim().replace(/ /g,"_") + "_DropDown";
     return id;
 };
-//-------------------------ON.CLICK CALLS--------------------
 
+function userInput2Address (state, city, zip, street){
+    var address = street.trim()+"%20"+zip.trim()+"%20"+city.trim()+"%20"+state.trim();
+    var address2 = address.replace(/ /g, "%20");
+    return address2;
+};
+
+//============================= ON.CLICK CALLS =========================================
+//-------- Process User Input --------------------------------
 $("#submitBtn").on("click", function () {
-    var state = $("#stateId").val().trim();
-    var city = $("#cityId").val().trim();
-    var zip = $("#zipId").val().trim();
+    var state  = $("#stateId").val().trim();
+    var city   = $("#cityId").val().trim();
+    var zip    = $("#zipId").val().trim();
     var street = $("#streetId").val().trim();
-    var apiResponse = address2CandidateList(state, city, zip, street);
-    displayReps(apiResponse);
+    var address = userInput2Address(state,city,zip,street);
+    address2CandidateList(address);
 });
 
+//-------- DropDown Mechanic --------------------------------
 $(document).on("click",".dropdownbutton",function(){
-    console.log(this);
     if (!$(this).data("data-show")){
         $("#"+officeName2Id($(this).text())).show();
         $(this).data("data-show",1);
@@ -102,6 +92,8 @@ $(document).on("click",".dropdownbutton",function(){
         $(this).data("data-show",0);
     }
 });
+
+//-------- display Wiki Results of person clicked --------------------------------
 $(document).on("click",".repLink",function(){
     wikiSearch($(this).text());
-    });
+});
