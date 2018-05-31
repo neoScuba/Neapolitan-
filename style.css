@@ -7,32 +7,42 @@
     width: 85%;
 }
 
-.header,
-.footer {
-    background-color: #3D9FFF;
+.header{
+    /* background-color: #3D9FFF; */
+    background-color: red;
     text-align: center;
     padding: 10px;
 }
 
 .content {
-    background-color: #cfd8dc;
-}
-
-.header,
-.footer {
-    text-align: center;
-    padding: 15px;
-    background-color: #478DFF;
+    /* background-color: #cfd8dc; */
+    /* background-color: #3D9FFF; */
+    background: url(United_States_Capitol_west_front_edit2.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .footer {
     position: relative;
-    bottom: 0;
     width: 100%;
+    /* background-color: #3D9FFF; */
+    background-color: red;
+    text-align: center;
+    padding: 10px;
 }
 
-body {
-    background-color: #ECEDED;
+h1 {
+    font-family: 'Gentium Basic', serif, bold;
+    margin-top: 0;
+    padding-top: 15px;
+    text-align: center;
+    font-size: 50px;
+}
+
+p {
+    margin: 0;
+    padding: 0;
 }
 
 .row {
@@ -45,37 +55,32 @@ body {
 }
 
 .form {
-    background-color: #FFFFDF;
+    background-color: white;
 }
 
 /* label color */
-
 .input-field label {
     color: #333333;
 }
 
 /* label focus color */
-
 .input-field input[type=text]:focus+label {
     color: #333333;
 }
 
 /* label underline focus color */
-
 .input-field input[type=text]:focus {
     border-bottom: 1px solid #333333;
     box-shadow: 0 1px 0 0 #333333;
 }
 
 /* valid color */
-
 .input-field input[type=text].valid {
     border-bottom: 1px solid #333333;
     box-shadow: 0 1px 0 0 #333333;
 }
 
 /* invalid color */
-
 .input-field input[type=text].invalid {
     border-bottom: 1px solid #333333;
     box-shadow: 0 1px 0 0 #333333;
@@ -90,34 +95,29 @@ body {
 }
 
 /* label focus color */
-
 .input-field input[type=text]:focus+label {
     color: #777777;
 }
 
 /* label underline focus color */
-
 .input-field input[type=text]:focus {
     border-bottom: 1px solid #777777;
     box-shadow: 0 1px 0 0 #777777;
 }
 
 /* valid color */
-
 .input-field input[type=text].valid {
     border-bottom: 1px solid #777777;
     box-shadow: 0 1px 0 0 #777777;
 }
 
 /* invalid color */
-
 .input-field input[type=text].invalid {
     border-bottom: 1px solid #777777;
     box-shadow: 0 1px 0 0 #777777;
 }
 
 /* icon prefix focus color */
-
 .input-field .prefix.active {
     color: #777777;
 }
@@ -126,9 +126,13 @@ body {
     color: #777777;
 }
 
-#submitBtn {
-    background-color: #6282FF;
-    margin: 0 0 15px 10px;
+#submitBtn{
+    background: #6282FF;
+    margin-bottom: 10px;
+}
+
+#leftNavBar {
+    text-align: center;
 }
 
 .resp-container {
@@ -146,11 +150,6 @@ body {
     border: 0;
 }
 
-#submitBtn {
-    background-color: green;
-    margin: 0 0 15px 10px;
-}
-
 #candidateListId {
     background-color: white;
     padding: 10px 15px 10px 10px;
@@ -158,15 +157,21 @@ body {
 }
 
 /* Drow Down Buttons after address is entered*/
-
 .dropdownbutton {
     text-align: center;
-    display: block;
     font-size: 12px;
-    background: #3D9FFF;
+    background: gray;
     width: 100%;
     font-family: Georgia;
     margin: 5px 0px;
+}
+
+.dropdownbutton:hover {
+    background: red;
+}
+
+.dropdownbutton:focus {
+    background: red;
 }
 
 .collection {
