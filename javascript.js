@@ -66,7 +66,7 @@ function wikiSearch(searchTerm){
         },
     })
     .done(function(response) {
-        $(wikiContent).attr('src', response[3][0]);
+        $("#wikiContent").attr('src', response[3][0]);
     })
     .fail(function() {
         console.log("error");
