@@ -41,7 +41,7 @@ function displayReps(apiResponse){
         for (officialIndex = 0; officialIndex<office.officialIndices.length; officialIndex++){
             var officialObj = apiResponse.officials[office.officialIndices[officialIndex]];
             var official = $("<li>");
-            var link = $("<a href='#' target='iframe_a''class=repLink'></a>");
+            var link = $("<a href='#' target='iframe_a' class='repLink'></a>");
             $(link).text(officialObj.name);
             $(official).append(link);
             $(dropDownContent).append(official);
@@ -68,7 +68,7 @@ function wikiSearch(searchTerm){
     })
     .done(function(response) {
         linkSource = response[3][0];
-        console.log(response);
+        console.log(linkSource);
     })
     .fail(function() {
         console.log("error");
@@ -76,6 +76,8 @@ function wikiSearch(searchTerm){
     .always(function() {
         // console.log('complete');
     });
+    console.log("1");
+    console.log(linkSource);
     return linkSource; 
 };
 
@@ -106,6 +108,7 @@ $(document).on("click",".dropdownbutton",function(){
     }
 });
 $(document).on("click",".repLink",function(){
-    wikiSearch($(this).text);
-    console.log(wikiSearch($(this).text));
+    // wikiSearch($(this).text);
+    console.log("Name perssed");
+    console.log(wikiSearch($(this).text()));
     });
