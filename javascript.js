@@ -6,8 +6,9 @@ function address2CandidateList(address){
         method: 'GET',
     }).done(function (response) {
         displayReps(response);
+        $("#notification").text("");
     }).fail(function (response) {
-        //Display Wrong address?
+        $("#notification").text("Invalid Address");
     })
 };
 

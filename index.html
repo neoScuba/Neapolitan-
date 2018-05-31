@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Materialize::CDN::Link::css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
@@ -10,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- OurCss::Link -->
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Gentium+Basic" rel="stylesheet">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,18 +19,18 @@
 
 <body>
     <!-- code goes here -->
-    <div class="row header">
-        <div class="col s12">Local Leaders</div>
-    </div>
+    <div class="row header"></div>
     <div class="row content">
         <div class="container">
             <div class="col s4 form">
                 <div class="row">
                     <form class="col s12">
+
+                        <div class="row" id="leftNavBar">
+                            <h1 class="pageTitle">Local Leaders</h1>
+                            <p id="instructions"><strong>Insert your current residence to search for your politicians.</strong></p>
+
                         <div class="row">
-                            <p id="instructions">
-                                <strong>Insert your current residence to search for your local politicians.</strong>
-                            </p>
                             <div class="input-field col s12">
                                 <div class="input-field col s12">
                                     <input id="streetId" type="text" class="validate">
@@ -64,16 +64,11 @@
             </div>
             <div class="resp-container">
                 <!--Put Api here to create content-->
-                <iframe class="resp-iframe" id="wikiContent" src="https://en.wikipedia.org/wiki/Main_Page" name="iframe_a" gesture="media"
-                    allow="encrypted-media" allowfullscreen></iframe>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col s12 footer">footer</div>
-    </div>
+    <div class="row footer"></div>
 
-    <!-- JAVASCRIPT LINKS -->
     <!-- OurJavaScript::Link -->
     <script src="javascript.js"></script>
 
