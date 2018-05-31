@@ -1,5 +1,5 @@
 //============================= FUNCTIONS =========================================
-//------ ocdid2CandidateList: uses ocdid to make civic api request, returns repList
+//------ addressCandidateList: calls google Civic API using the given address and calls displayReps
 function address2CandidateList(address){
     $.ajax({
         url: "https://www.googleapis.com/civicinfo/v2/representatives?"+"address="+address+"&key=AIzaSyBB5fWaIK-L-cV2wNpc2G2cQRBtQlRR4B4",
@@ -12,7 +12,7 @@ function address2CandidateList(address){
     })
 };
 
-//------ displayRepList: turns list items {repObj} to buttons and appends to buttonDiv
+//------ displayReps: creates dropdowns(officeTitle->personName) using apiResponse
 function displayReps(apiResponse){
     $("#candidateListId").empty();
     var offices = apiResponse.offices;
@@ -42,14 +42,12 @@ function displayReps(apiResponse){
     }
 };
 
-//------ wikiSearch: display wiki results of person clicked in iframe
+//------ wikiSearch: wiki searches searchTerm and displays first link in iframe (#wikiContent)
 function wikiSearch(searchTerm){
-    // console.log("in wikiSearch with term:" + searchTerm);
     $.ajax({
         url: 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + searchTerm + "&format=json&callback=?",
         type: 'GET',
         dataType: 'json',
-        async:false,
         data: function (data, status, jqXHR) {
             console.log(data);
         },
@@ -59,12 +57,14 @@ function wikiSearch(searchTerm){
     })
 };
 
-//------ HELPER FUNCTIONS
+//============================= HELPER FUNCTIONS =========================================
+//------ officeName2Id: name->'FirstName LastName' => id->'FirstName_LastName_DropDown'
 function officeName2Id(name){
     var id = name.trim().replace(/ /g,"_") + "_DropDown";
     return id;
 };
 
+//------ userInput2Address: combines components to single string to be used in URLs
 function userInput2Address (state, city, zip, street){
     var address = street.trim()+"%20"+zip.trim()+"%20"+city.trim()+"%20"+state.trim();
     var address2 = address.replace(/ /g, "%20");
@@ -72,7 +72,7 @@ function userInput2Address (state, city, zip, street){
 };
 
 //============================= ON.CLICK CALLS =========================================
-//-------- Process User Input --------------------------------
+//-------- When SubmitBtn Pressed, Process User Input --------------------------------
 $("#submitBtn").on("click", function () {
     var state  = $("#stateId").val().trim();
     var city   = $("#cityId").val().trim();
@@ -94,7 +94,7 @@ $(document).on("click",".dropdownbutton",function(){
     }
 });
 
-//-------- display Wiki Results of person clicked --------------------------------
+//-------- When Person Is Clicked, Show Wikiresults  --------------------------------
 $(document).on("click",".repLink",function(){
     wikiSearch($(this).text());
 });
